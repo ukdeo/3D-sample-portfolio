@@ -19,7 +19,7 @@ const projects = [
   },
   {
     title: "Care Connect (Hackathon)",
-    desc: "Award-winning healthcare connection platform matching critical patients with local services. Developed in React and Node.js during a 48-hour hackathon sprint.",
+    desc: " Healthcare connection platform matching critical patients with local services. Developed in React and Node.js during a 48-hour hackathon sprint.",
     icon: "🏥",
     tags: ["React", "Node.js", "Winner"],
     link: "https://github.com/ukdeo/care-connect"
@@ -67,7 +67,7 @@ const skills = [
   { name: "JavaScript", cat: "Languages", level: "Expert", desc: "Builds responsive client-side UIs and interactive Canvas simulations.", color: "#38bdf8", shadow: "rgba(56,189,248,0.5)" },
   { name: "C++", cat: "Languages", level: "Proficient", desc: "Object-oriented structures, algorithmic solutions, and memory control.", color: "#10b981", shadow: "rgba(16,185,129,0.5)" },
   { name: "C", cat: "Languages", level: "Proficient", desc: "System architectures, file storage APIs, and compiler foundations.", color: "#ef4444", shadow: "rgba(239,68,68,0.5)" },
-  
+
   // Frontend
   { name: "React", cat: "Frontend", level: "Expert", desc: "Single Page Apps, custom hooks, context stores, and styled design grids.", color: "#ec4899", shadow: "rgba(236,72,153,0.5)" },
   { name: "HTML5 / CSS3", cat: "Frontend", level: "Expert", desc: "Grid styling, custom variables, and responsive layout standards.", color: "#38bdf8", shadow: "rgba(56,189,248,0.5)" },
@@ -98,7 +98,7 @@ const education = [
     degree: "+2 Science",
     school: "Shree Devi Mavi",
     year: "COMPLETED 2021",
-    score: "CGPA: 2.69",
+    score: "CGPA: 3.07",
     desc: "Specialized in Physics, Chemistry, and Mathematics. Formed foundational logic in computing systems and participated in regional science challenges."
   },
   {
@@ -126,16 +126,16 @@ function initStarsCanvas(canvasId) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
-  
+
   let stars = [];
   const count = 100;
-  
+
   function resize() {
     canvas.width = canvas.parentElement.offsetWidth;
     canvas.height = canvas.parentElement.offsetHeight;
     generate();
   }
-  
+
   function generate() {
     stars = [];
     for (let i = 0; i < count; i++) {
@@ -148,26 +148,26 @@ function initStarsCanvas(canvasId) {
       });
     }
   }
-  
+
   function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#ffffff";
-    
+
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
       s.alpha += s.speed;
       if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
-      
+
       ctx.beginPath();
       ctx.globalAlpha = Math.max(0.1, s.alpha);
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
     }
-    
+
     ctx.globalAlpha = 1.0;
     requestAnimationFrame(loop);
   }
-  
+
   window.addEventListener("resize", resize);
   resize();
   loop();
@@ -231,14 +231,14 @@ document.addEventListener("mousemove", (e) => {
 
 function animateParallax() {
   if (window.innerWidth >= 768) {
-    tiltY += (mouseX * 14 - tiltY) * 0.08; 
-    tiltX += (mouseY * -10 - tiltX) * 0.08;   
-    
+    tiltY += (mouseX * 14 - tiltY) * 0.08;
+    tiltX += (mouseY * -10 - tiltX) * 0.08;
+
     // Smoothly interpolate look-rotation and walking offset
     currentYRotation += (targetYRotation - currentYRotation) * 0.1;
     hallwayZOffset += (targetZOffset - hallwayZOffset) * 0.1;
     currentRoomZOffset += (targetRoomZOffset - currentRoomZOffset) * 0.1;
-    
+
     const activeRoomBox = document.querySelector(".sc.on .room-3d");
     if (activeRoomBox) {
       if (activeRoomBox.id === "hallway-box") {
@@ -256,15 +256,15 @@ function animateParallax() {
       }
     }
   }
-  
+
   // Proximity Detection action prompt update
   const promptEl = document.getElementById("hall-action-prompt");
   if (promptEl) {
     if (hallScreen.classList.contains("on") && !isTransitioning) {
       let newZone = null;
-      if (hallwayZOffset > 100 && hallwayZOffset < 280)       newZone = "zone1";
+      if (hallwayZOffset > 100 && hallwayZOffset < 280) newZone = "zone1";
       else if (hallwayZOffset > 420 && hallwayZOffset < 560) newZone = "zone2";
-      else if (hallwayZOffset >= 560)                         newZone = "zone3";
+      else if (hallwayZOffset >= 560) newZone = "zone3";
 
       // Only re-render the HTML when the zone actually changes
       if (newZone !== currentZone) {
@@ -306,7 +306,7 @@ function animateParallax() {
       }
     }
   }
-  
+
   requestAnimationFrame(animateParallax);
 }
 requestAnimationFrame(animateParallax);
@@ -337,13 +337,13 @@ frontDoor.addEventListener("click", () => {
   doorLeaf.style.transform = "rotateY(-95deg)";
   doorGlow.style.opacity = "0.9";
   doorGlow.style.transition = "opacity 0.6s";
-  
+
   houseWrapper.style.transformOrigin = "270px 294px";
   houseWrapper.style.transition = "transform 2.2s cubic-bezier(0.5, 0, 0.25, 1)";
   houseWrapper.style.transform = "scale(8.5)";
   extScreen.style.transition = "opacity 1.8s ease-in";
   extScreen.style.opacity = "0";
-  
+
   setTimeout(() => {
     extScreen.classList.remove("on");
     hallScreen.classList.add("on");
@@ -356,14 +356,14 @@ frontDoor.addEventListener("click", () => {
 });
 
 // Global Room Transition Handler (Click/Proximity Action / Enter key triggered)
-window.triggerRoomTransition = function(roomType) {
+window.triggerRoomTransition = function (roomType) {
   if (isTransitioning) return;
   isTransitioning = true;
-  
+
   // Hide action prompt immediately
   const prompt = document.getElementById("hall-action-prompt");
   if (prompt) prompt.classList.remove("show");
-  
+
   // Swing the door open
   const door = document.querySelector(`#hallway-box .dr[data-room="${roomType}"]`);
   if (door) {
@@ -371,7 +371,7 @@ window.triggerRoomTransition = function(roomType) {
     door.style.transition = "transform 1.2s ease";
     door.style.transform = "rotateY(-105deg)";
   }
-  
+
   // Animate first person walk-up on desktop
   if (window.innerWidth >= 768) {
     let zoomZ = 600;
@@ -380,29 +380,29 @@ window.triggerRoomTransition = function(roomType) {
     else if (roomType === "education") { zoomZ = 180; zoomY = -65; }
     else if (roomType === "skills") { zoomZ = 520; zoomY = 65; }
     else if (roomType === "hobbies") { zoomZ = 520; zoomY = -65; }
-    
+
     targetZOffset = zoomZ;
     targetYRotation = zoomY;
-    
+
     setTimeout(() => {
       hallwayBox.style.transition = "transform 1.2s cubic-bezier(0.25, 1, 0.4, 1)";
       hallwayBox.style.transform = `translate3d(0, 0, ${zoomZ + 120}px) rotateY(${zoomY}deg) scale(1.3)`;
     }, 50);
   }
-  
+
   hallScreen.style.transition = "opacity 1.2s ease-in-out";
   setTimeout(() => {
     hallScreen.style.opacity = "0";
   }, 300);
-  
+
   setTimeout(() => {
     if (door) door.style.transform = "";
     hallwayBox.style.transition = "";
     hallwayBox.style.transform = "";
-    
+
     hallScreen.classList.remove("on");
     hallScreen.style.opacity = "";
-    
+
     if (roomType === "contact") {
       currentRoomType = "contact";
       targetRoomZOffset = 0;
@@ -451,7 +451,7 @@ window.addEventListener("keydown", (e) => {
 
 window.addEventListener("keyup", (e) => {
   if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A" ||
-      e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+    e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
     targetYRotation = 0;
   }
 });
@@ -489,21 +489,21 @@ function goOutside() {
   isTransitioning = true;
   hallScreen.style.transition = "opacity 0.8s ease-in-out";
   hallScreen.style.opacity = "0";
-  
+
   setTimeout(() => {
     hallScreen.classList.remove("on");
     extScreen.classList.add("on");
     extScreen.style.opacity = "0";
-    
+
     houseWrapper.style.transition = "transform 1.6s cubic-bezier(0.25, 1, 0.5, 1)";
     houseWrapper.style.transform = "scale(1)";
-    
+
     const doorLeaf = document.getElementById("door-leaf");
     if (doorLeaf) {
       doorLeaf.style.transform = "rotateY(0deg)";
     }
     doorGlow.style.opacity = "0";
-    
+
     setTimeout(() => {
       extScreen.style.opacity = "1";
       targetZOffset = 0;
@@ -575,9 +575,9 @@ function loadRoom(type) {
   roomScreen.classList.add("on");
   roomScreen.style.opacity = "0";
   setTimeout(() => roomScreen.style.opacity = "1", 50);
-  
+
   currentRoomType = type;
-  
+
   // Set title
   const titleMap = {
     "projects": "PROJECTS ROOM",
@@ -586,7 +586,7 @@ function loadRoom(type) {
     "hobbies": "HOBBIES ROOM"
   };
   document.getElementById("room-title").innerText = titleMap[type] || "ROOM";
-  
+
   const hintMap = {
     "projects": "Scroll mouse wheel to walk down the bus topology line in 3D.",
     "skills": "Scroll to walk forward and hover on cards to review proficiencies.",
@@ -601,13 +601,13 @@ function loadRoom(type) {
   currentRoomZOffset = 0;
   roomBox.removeEventListener("wheel", handleProjectsScroll);
   roomBox.removeEventListener("wheel", handleRoomScroll);
-  
+
   if (type === "projects") {
     roomBox.addEventListener("wheel", handleProjectsScroll, { passive: false });
   } else {
     roomBox.addEventListener("wheel", handleRoomScroll, { passive: false });
   }
-  
+
   // Render structure
   if (type === "projects") {
     renderProjectsRoom();
@@ -618,14 +618,14 @@ function loadRoom(type) {
   } else if (type === "hobbies") {
     renderHobbiesRoom();
   }
-  
+
   attachCursorHoverEvents(roomBox);
 }
 
 function handleRoomScroll(e) {
   if (window.innerWidth < 768) return;
   e.preventDefault();
-  
+
   targetRoomZOffset += e.deltaY * 0.72;
   const maxDepth = 750; // allow walking up to Z=750 (close to the back wall at Z=-900)
   targetRoomZOffset = Math.max(0, Math.min(maxDepth, targetRoomZOffset));
@@ -635,13 +635,13 @@ function handleRoomScroll(e) {
 function handleProjectsScroll(e) {
   if (window.innerWidth < 768) return; // standard vertical scroll handles mobile
   e.preventDefault();
-  
+
   // Zoom speed
   projectsZOffset += e.deltaY * 0.72;
   // Bound scroll from z = 0 (entrance) to z = max depth + 400
   const maxDepth = (projects.length * 220) + 200;
   projectsZOffset = Math.max(0, Math.min(maxDepth, projectsZOffset));
-  
+
   const busScene = document.getElementById("bus-scene");
   if (busScene) {
     busScene.style.transform = `translateZ(${projectsZOffset}px)`;
@@ -679,7 +679,7 @@ function renderProjectsRoom() {
     <!-- SCENE CONTAINER FOR BUS LINE & NODES -->
     <div class="bus-scene-3d" id="bus-scene">
   `;
-  
+
   // Place frames at alternating X coordinates (left/right of center line) and staggered Z coordinates (depth)
   projects.forEach((proj, idx) => {
     const isLeft = idx % 2 === 0;
@@ -687,7 +687,7 @@ function renderProjectsRoom() {
     const yCoord = "15vh";
     const zDepth = -(idx * 220) - 150; // starts at z = -150px, steps back by 220px per item
     const stringHeight = 100 + (idx % 3) * 30; // alternating heights
-    
+
     html += `
       <div class="fw-3d" style="left: ${xCoord}; top: ${yCoord}; transform: translateZ(${zDepth}px);" data-index="${idx}">
         <div class="string-3d" style="height: ${stringHeight}px;"></div>
@@ -701,35 +701,35 @@ function renderProjectsRoom() {
       </div>
     `;
   });
-  
+
   html += `</div>`;
   roomBox.innerHTML = html;
-  
+
   // Set up mouse wheel scroll listener for Z translation walk-through directly on roomBox
   roomBox.addEventListener("wheel", handleProjectsScroll, { passive: false });
-  
+
   // Hover & Click Bindings
   const floatingCard = document.getElementById("floating-card");
   roomBox.querySelectorAll(".fw-3d").forEach(node => {
     const idx = parseInt(node.getAttribute("data-index"));
     const proj = projects[idx];
-    
+
     node.addEventListener("mouseenter", () => {
       floatingCard.querySelector(".float-title").innerText = proj.title;
       floatingCard.querySelector(".float-desc").innerText = proj.desc;
       floatingCard.querySelector(".float-hint").innerText = "Click to inspect code";
       floatingCard.classList.add("show");
     });
-    
+
     node.addEventListener("mousemove", (e) => {
       floatingCard.style.left = `${e.clientX + 16}px`;
       floatingCard.style.top = `${e.clientY + 16}px`;
     });
-    
+
     node.addEventListener("mouseleave", () => {
       floatingCard.classList.remove("show");
     });
-    
+
     node.addEventListener("click", () => {
       openModal(proj);
     });
@@ -747,15 +747,15 @@ function renderSkillsRoom() {
         <div class="skill-cat-label">${cat}</div>
         <div class="skill-cat-items">
           ${items.map((s, _) => {
-            const globalIdx = skills.indexOf(s);
-            return `
+      const globalIdx = skills.indexOf(s);
+      return `
               <div class="skill-card" 
                    style="--color:${s.color}; --shadow:${s.shadow};"
                    data-index="${globalIdx}">
                 <div class="skill-card-name">${s.name}</div>
                 <div class="skill-card-level">${s.level}</div>
               </div>`;
-          }).join('')}
+    }).join('')}
         </div>
       </div>`;
   }).join('');
@@ -849,7 +849,7 @@ function renderEducationRoom() {
   roomBox.querySelectorAll('.edu-card').forEach(card => {
     const id = card.getAttribute('data-id');
     const edu = education.find(e => e.id === id);
-    
+
     card.addEventListener('mouseenter', () => {
       if (edu) {
         floatingCard.querySelector(".float-title").innerText = edu.degree;
@@ -865,7 +865,7 @@ function renderEducationRoom() {
     card.addEventListener('mouseleave', () => {
       floatingCard.classList.remove("show");
     });
-    
+
     card.addEventListener('click', () => {
       if (edu) {
         openModal({
@@ -884,7 +884,7 @@ function renderEducationRoom() {
 function renderHobbiesRoom() {
   const hobbyList = [
     { key: 'camera', icon: '📷', label: 'Videography & Editing' },
-    { key: 'easel',  icon: '🎨', label: 'Graphic Design' },
+    { key: 'easel', icon: '🎨', label: 'Graphic Design' },
     { key: 'dumbbell', icon: '🏋️', label: 'Bodybuilding' }
   ];
 
@@ -917,7 +917,7 @@ function renderHobbiesRoom() {
   roomBox.querySelectorAll('.hobby-card').forEach(card => {
     const key = card.getAttribute('data-key');
     const data = hobbies[key];
-    
+
     card.addEventListener('mouseenter', () => {
       if (data) {
         floatingCard.querySelector(".float-title").innerText = data.title;
@@ -933,7 +933,7 @@ function renderHobbiesRoom() {
     card.addEventListener('mouseleave', () => {
       floatingCard.classList.remove("show");
     });
-    
+
     card.addEventListener('click', () => {
       if (data) {
         openModal({
@@ -968,9 +968,9 @@ function openModal(proj) {
   mIcon.innerText = proj.icon;
   mTitle.innerText = proj.title;
   mDesc.innerText = proj.desc;
-  
+
   mTags.innerHTML = proj.tags.map(t => `<span class="modal-tag">${t}</span>`).join("");
-  
+
   if (proj.link && proj.link !== "#") {
     mLink.href = proj.link;
     mLink.innerText = "View Code Repository";
@@ -980,7 +980,7 @@ function openModal(proj) {
     mLink.innerText = "Send Email";
     mLink.style.background = "#10b981"; // Green for contact
   }
-  
+
   cursor.classList.remove("hovered");
 }
 
@@ -1034,14 +1034,14 @@ function appendMessage(text, isUser) {
 function processChatInput() {
   const text = chatInput.value.trim();
   if (!text) return;
-  
+
   appendMessage(text, true);
   chatInput.value = "";
-  
+
   // Basic keyword-based responses
   const lower = text.toLowerCase();
   let response = "I'm just a neighbor, so I don't know everything! But try asking about Uday's 'skills', 'projects', 'education', or 'hobbies'.";
-  
+
   if (lower.includes("skill") || lower.includes("tech") || lower.includes("tools")) {
     response = "Uday is an expert in Python, JavaScript, React, HTML/CSS, Git, and problem solving. He also knows C, C++, Docker, MongoDB, and SQL!";
   } else if (lower.includes("project")) {
@@ -1074,8 +1074,8 @@ chatInput.addEventListener("keypress", (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   initStarsCanvas("star-canvas");
-    initStarsCanvas("balcony-star-canvas");
-  
+  initStarsCanvas("balcony-star-canvas");
+
   // Add scroll handler for contact room
   const contactBox = document.getElementById("contact-box");
   if (contactBox) {
